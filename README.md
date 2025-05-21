@@ -27,7 +27,6 @@ CryptoSentinel is a modern Android app for secure AES-based text encryption and 
 |------|---------|---------|
 | ![](assets/home_screen.png) | ![](assets/encrypt_screen.png) | ![](assets/decrypt_screen.png) |
 | History | Home Dark |
-|---------|-----------|
 | ![](assets/history_screen.png) | ![](assets/dark_home_screen.png) |
 
 ## 💾 Technologies Used
