@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">CryptoSentinel</string>
+    <string name="share">Share</string>
+    <string name="copied">Copied</string>
+    <string name="encrypted_text">Encrypted Text</string>
+    <string name="cancel">Cancel</string>
+    <string name="incorrect_text_or_encryption">Incorrect text or encryption!</string>
+    <string name="biometric_verification_not_supported">Biometric verification not supported</string>
+    <string name="login_verification">Login verification</string>
+    <string name="verify_your_identity_to_use_the_app">Verify your identity to use the app</string>
+    <string name="decrypt">Decrypt</string>
+    <string name="copy">Copy</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="history">History</string>
+    <string name="enter_text">Enter Text</string>
+    <string name="enter_encrypted_text">Enter Encrypted Text</string>
+    <string name="settings">Settings</string>
+    <string name="theme">Theme</string>
+    <string name="language">Language</string>
+    <string name="turkish_english_or_system_default">Turkish, English or System default</string>
+    <string name="light_dark_or_system_default">Light, Dark or System default</string>
+    <string name="turkish">Turkish</string>
+    <string name="english">English</string>
+    <string name="system_default">System Default</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="decrypted_text">Decrypted Text</string>
+    <string name="qr_code">QR Code</string>
+    <string name="delete">Delete</string>
+    <string name="text">Text</string>
+</resources>

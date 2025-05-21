@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mahmutalperenunal.cryptosentinel.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_encrypt"
+            app:destination="@id/encryptionFragment" />
+        <action
+            android:id="@+id/action_home_to_decrypt"
+            app:destination="@id/decryptionFragment" />
+        <action
+            android:id="@+id/action_home_to_history"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/encryptionFragment"
+        android:name="com.mahmutalperenunal.cryptosentinel.ui.encryption.EncryptionFragment"
+        android:label="Encrypt"
+        tools:layout="@layout/fragment_encryption" />
+
+    <fragment
+        android:id="@+id/decryptionFragment"
+        android:name="com.mahmutalperenunal.cryptosentinel.ui.decryption.DecryptionFragment"
+        android:label="Decrypt"
+        tools:layout="@layout/fragment_decryption" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.mahmutalperenunal.cryptosentinel.ui.history.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.mahmutalperenunal.cryptosentinel.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

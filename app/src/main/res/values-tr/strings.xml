@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">CryptoSentinel</string>
+    <string name="share">Paylaş</string>
+    <string name="copied">Kopyalandı</string>
+    <string name="encrypted_text">Şifrelenmiş Metin</string>
+    <string name="cancel">İptal</string>
+    <string name="incorrect_text_or_encryption">Metin veya şifreleme hatalı!</string>
+    <string name="biometric_verification_not_supported">Biyometrik doğrulama desteklenmiyor</string>
+    <string name="login_verification">Giriş Doğrulaması</string>
+    <string name="verify_your_identity_to_use_the_app">Uygulamayı kullanmak için kimliğinizi doğrulayın</string>
+    <string name="decrypt">Şifreyi Çöz</string>
+    <string name="copy">Kopyala</string>
+    <string name="encrypt">Şifrele</string>
+    <string name="history">Geçmiş</string>
+    <string name="enter_text">Metin Girin</string>
+    <string name="enter_encrypted_text">Şifrelenmiş Metni Girin</string>
+    <string name="settings">Ayarlar</string>
+    <string name="theme">Tema</string>
+    <string name="language">Dil</string>
+    <string name="turkish_english_or_system_default">Türkçe, İngilizce veya Sistem varsayılanı</string>
+    <string name="light_dark_or_system_default">Açık, Koyu veya Sistem varsayılanı</string>
+    <string name="turkish">Türkçe</string>
+    <string name="english">İngilizce</string>
+    <string name="system_default">Sistem Varsayılanı</string>
+    <string name="light">Açık</string>
+    <string name="dark">Koyu</string>
+    <string name="decrypted_text">Şifresi Çözülmüş Metin</string>
+    <string name="qr_code">QR Kod</string>
+    <string name="delete">Sil</string>
+    <string name="text">Metin</string>
+</resources>
