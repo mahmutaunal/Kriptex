@@ -6,7 +6,7 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 
 - 🔒 AES-128 CBC mode encryption & decryption
 - 📦 Room database to store encryption/decryption history
-- 📱 Biometric authentication (Fingerprint/PIN) on app launch
+- 📷 QR code generation & scanning for encrypted/decrypted text
 - 📷 Automatic QR code generation for encrypted/decrypted text
 - 🌓 Theme selection: Light / Dark / System default
 - 🌍 Language selection: English / Turkish / System default
