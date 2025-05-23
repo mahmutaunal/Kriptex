@@ -2,6 +2,7 @@ package com.mahmutalperenunal.kriptex.ui.encryption
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +30,8 @@ class EncryptionFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var db: AppDatabase
+
+    private lateinit var qrBitmap: Bitmap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +69,9 @@ class EncryptionFragment : Fragment() {
                 val result = EncryptionUtil.encrypt(input)
 
                 binding.tvEncrypted.text = result
-                binding.ivQrCode.setImageBitmap(QrCodeGenerator.generate(result, context = requireContext()))
+
+                qrBitmap = QrCodeGenerator.generate(result, context = requireContext())
+                binding.ivQrCode.setImageBitmap(qrBitmap)
 
                 binding.ivQrCode.visibility = View.VISIBLE
                 binding.btnCopy.visibility = View.VISIBLE
@@ -111,7 +116,6 @@ class EncryptionFragment : Fragment() {
         binding.btnShare.setOnClickListener {
             val text = binding.tvEncrypted.text.toString()
             if (text.isNotBlank()) {
-                val qrBitmap = QrCodeGenerator.generate(text, context = requireContext())
                 ShareUtils.shareTextWithQrCode(requireContext(), text, qrBitmap)
             }
         }
