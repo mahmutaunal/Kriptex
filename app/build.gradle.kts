@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mahmutalperenunal.cryptosentinel"
+    namespace = "com.mahmutalperenunal.kriptex"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.mahmutalperenunal.cryptosentinel"
+        applicationId = "com.mahmutalperenunal.kriptex"
         minSdk = 28
         targetSdk = 35
         versionCode = 1

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CryptoSentinel</string>
+    <string name="app_name">Kriptex</string>
     <string name="share">Share</string>
     <string name="copied">Copied</string>
     <string name="encrypted_text">Encrypted Text</string>
@@ -28,4 +28,9 @@
     <string name="qr_code">QR Code</string>
     <string name="delete">Delete</string>
     <string name="text">Text</string>
+    <string name="decrypt_success">Decryption successful</string>
+    <string name="encrypt_success">Encryption success</string>
+    <string name="history_empty">No records found.\nYour encrypted or decrypted texts will appear here.</string>
+    <string name="home">Home</string>
+    <string name="app_description">Welcome to Kriptex!\nSecurely encrypt and decrypt your sensitive data using QR codes.</string>
 </resources>

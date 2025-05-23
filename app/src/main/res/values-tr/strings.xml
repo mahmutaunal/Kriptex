@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CryptoSentinel</string>
+    <string name="app_name">Kriptex</string>
     <string name="share">Paylaş</string>
     <string name="copied">Kopyalandı</string>
     <string name="encrypted_text">Şifrelenmiş Metin</string>
@@ -28,4 +28,9 @@
     <string name="qr_code">QR Kod</string>
     <string name="delete">Sil</string>
     <string name="text">Metin</string>
+    <string name="decrypt_success">Şifre çözme başarılı</string>
+    <string name="encrypt_success">Şifreleme başarılı</string>
+    <string name="history_empty">Hiçbir kayıt bulunamadı.\nŞifrelenmiş veya şifresi çözülmüş metinleriniz burada görünecektir.</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="app_description">Kriptex\'e hoş geldiniz!\nQR kodlarını kullanarak hassas verilerinizi güvenli bir şekilde şifreleyin ve şifresini çözün.</string>
 </resources>

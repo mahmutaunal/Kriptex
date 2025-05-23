@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CryptoSentinel"
+rootProject.name = "Kriptex"
 include(":app")
  

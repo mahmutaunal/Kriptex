@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mahmutalperenunal.cryptosentinel.ui.home.HomeFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -25,25 +25,39 @@
 
     <fragment
         android:id="@+id/encryptionFragment"
-        android:name="com.mahmutalperenunal.cryptosentinel.ui.encryption.EncryptionFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.encryption.EncryptionFragment"
         android:label="Encrypt"
-        tools:layout="@layout/fragment_encryption" />
+        tools:layout="@layout/fragment_encryption">
+        <action
+            android:id="@+id/action_encryption_to_qrScanner"
+            app:destination="@id/qrScannerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/decryptionFragment"
-        android:name="com.mahmutalperenunal.cryptosentinel.ui.decryption.DecryptionFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.decryption.DecryptionFragment"
         android:label="Decrypt"
-        tools:layout="@layout/fragment_decryption" />
+        tools:layout="@layout/fragment_decryption">
+        <action
+            android:id="@+id/action_decryption_to_qrScanner"
+            app:destination="@id/qrScannerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.mahmutalperenunal.cryptosentinel.ui.history.HistoryFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.history.HistoryFragment"
         android:label="History"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.mahmutalperenunal.cryptosentinel.ui.settings.SettingsFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/qrScannerFragment"
+        android:name="com.mahmutalperenunal.kriptex.ui.qr.QrScannerFragment"
+        android:label="QrScannerFragment"
+        tools:layout="@layout/fragment_qr_scanner" />
 </navigation>

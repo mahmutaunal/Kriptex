@@ -1,6 +1,6 @@
-# 🔐 CryptoSentinel
+# 🔐 Kriptex
 
-CryptoSentinel is a modern Android app for secure AES-based text encryption and decryption with biometric protection, QR code generation, theme/language selection, and local history tracking.
+Kriptex is a modern Android app for secure AES-based text encryption and decryption with biometric protection, QR code generation, theme/language selection, and local history tracking.
 
 ## 🚀 Features
 
@@ -40,4 +40,4 @@ CryptoSentinel is a modern Android app for secure AES-based text encryption and 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/mahmutaunal/CryptoSentinel.git
+git clone https://github.com/mahmutaunal/Kriptex.git

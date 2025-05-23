@@ -37,7 +37,7 @@
 
 -dontwarn androidx.biometric.**
 
--keep class com.mahmutalperenunal.cryptosentinel.** { *; }
+-keep class com.mahmutalperenunal.kriptex.** { *; }
 
 -dontnote **
 -dontwarn **
