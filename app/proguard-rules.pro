@@ -35,8 +35,6 @@
     public <init>(android.view.View);
 }
 
--dontwarn androidx.biometric.**
-
 -keep class com.mahmutalperenunal.kriptex.** { *; }
 
 -dontnote **

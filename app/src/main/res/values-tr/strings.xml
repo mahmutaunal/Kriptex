@@ -5,7 +5,6 @@
     <string name="encrypted_text">Şifrelenmiş Metin</string>
     <string name="cancel">İptal</string>
     <string name="incorrect_text_or_encryption">Metin veya şifreleme hatalı!</string>
-    <string name="biometric_verification_not_supported">Biyometrik doğrulama desteklenmiyor</string>
     <string name="login_verification">Giriş Doğrulaması</string>
     <string name="verify_your_identity_to_use_the_app">Uygulamayı kullanmak için kimliğinizi doğrulayın</string>
     <string name="decrypt">Şifreyi Çöz</string>

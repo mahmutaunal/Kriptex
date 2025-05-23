@@ -1,6 +1,6 @@
 # 🔐 Kriptex
 
-Kriptex is a modern Android app for secure AES-based text encryption and decryption with biometric protection, QR code generation, theme/language selection, and local history tracking.
+Kriptex is a modern Android app for secure AES-based text encryption and decryption, QR code generation, theme/language selection, and local history tracking.
 
 ## 🚀 Features
 
@@ -31,7 +31,7 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 
 ## 💾 Technologies Used
 
-- Kotlin + Jetpack libraries (Navigation, Room, ViewModel, Biometric)
+- Kotlin + Jetpack libraries (Navigation, Room, ViewModel)
 - ZXing for QR code generation
 - Material Design 3
 - MVVM pattern + ViewBinding

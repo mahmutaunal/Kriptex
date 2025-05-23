@@ -72,9 +72,6 @@ dependencies {
     // Gson (GameSettings serialize/deserialize)
     implementation(libs.gson)
 
-    // Biometric
-    implementation(libs.biometric)
-
     // Zxing Android Embedded
     implementation(libs.zxing.android.embedded)
 
