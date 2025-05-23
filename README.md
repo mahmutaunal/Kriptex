@@ -26,8 +26,8 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 | Home | Encrypt | Decrypt |
 |------|---------|---------|
 | ![](assets/home_screen.png) | ![](assets/encrypt_screen.png) | ![](assets/decrypt_screen.png) |
-| History | Home Dark |
-| ![](assets/history_screen.png) | ![](assets/dark_home_screen.png) |
+| History | QR Code Scanner |
+| ![](assets/history_screen.png) | ![](assets/barcode_screen.png) |
 
 ## 💾 Technologies Used
 
