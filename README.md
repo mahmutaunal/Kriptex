@@ -12,6 +12,8 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 - 🌍 Language selection: English / Turkish / System default
 - 📋 Copy & Share functionality
 - 🧠 MVVM architecture with ViewBinding & NavigationComponent
+- ✅ Crash reporting with [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)
+- ✅ User behavior analytics with [Firebase Analytics](https://firebase.google.com/docs/analytics)
 
 ## 📱 Screens
 
@@ -36,6 +38,16 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 - Material Design 3
 - MVVM pattern + ViewBinding
 - Proguard optimizations
+
+### 🔧 Firebase Setup
+
+> Firebase is used for crash reporting and analytics (no sensitive user data is collected).
+
+To enable Firebase features:
+1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+2. Register your app using your package name.
+3. Download `google-services.json` and place it in the `app/` directory.
+4. Sync and run the project.
 
 ## 📦 Installation
 
