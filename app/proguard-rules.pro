@@ -37,6 +37,10 @@
 
 -keep class com.mahmutalperenunal.kriptex.** { *; }
 
+# Firebase Crashlytics
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+
 -dontnote **
 -dontwarn **
 -ignorewarnings

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.navigation.safe.args)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics.gradle)
 }
 
 android {
@@ -74,6 +76,11 @@ dependencies {
 
     // Zxing Android Embedded
     implementation(libs.zxing.android.embedded)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 
     // Test
     testImplementation(libs.junit)
