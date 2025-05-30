@@ -1,20 +1,40 @@
+# === Android Studio & IntelliJ ===
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.gradle/
 local.properties
+.DS_Store
+
+# IDE-specific
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# === Build & Intermediate Files ===
+/build/
+/app/build/
+/captures/
+/outputs/
+/externalNativeBuild/
+/cxx/
 *.apk
-app/release/baselineProfiles/0/app-release.dm
-app/release/baselineProfiles/1/app-release.dm
-app/release/output-metadata.json
 *.aab
+
+# === Signing & Keys ===
+*.jks
+*.keystore
+
+# === Firebase & Crashlytics ===
+app/google-services.json
+firebase-debug.log
+crashlytics-build.properties
+
+# === Baseline Profiles & Metadata ===
+app/release/baselineProfiles/
+app/release/output-metadata.json
+
+# === Kotlin KAPT ===
+.kapt/

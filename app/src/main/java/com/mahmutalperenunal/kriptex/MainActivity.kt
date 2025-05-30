@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -19,6 +18,7 @@ import com.mahmutalperenunal.kriptex.util.ThemeHelper
 import com.mahmutalperenunal.kriptex.util.VersionChecker
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
+import com.google.android.gms.ads.AdRequest
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
+
+        val adView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     private fun Context.checkVersionIfConnected() {
@@ -66,27 +70,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun Context.isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        } else {
-            val networkInfo = connectivityManager.activeNetworkInfo
-            networkInfo != null && networkInfo.isConnected
-        }
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
     private fun showUpdateDialog(context: Context) {
         MaterialAlertDialogBuilder(context)
-            .setTitle("Yeni Güncelleme Mevcut")
-            .setMessage("Yeni bir sürüm mevcut. Uygulamayı güncellemek ister misiniz?")
-            .setPositiveButton("Güncelle") { _, _ ->
+            .setTitle(context.getString(R.string.update_dialog_title))
+            .setMessage(context.getString(R.string.update_dialog_message))
+            .setPositiveButton(context.getString(R.string.update_dialog_positive)) { _, _ ->
                 val url = "https://play.google.com/store/apps/details?id=${context.packageName}"
                 val intent = Intent(Intent.ACTION_VIEW, url.toUri())
                 intent.setPackage("com.android.vending")
                 context.startActivity(intent)
             }
-            .setNegativeButton("Daha Sonra", null)
+            .setNegativeButton(context.getString(R.string.update_dialog_negative), null)
             .show()
     }
 

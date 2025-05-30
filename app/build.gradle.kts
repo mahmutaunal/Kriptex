@@ -20,6 +20,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["ADMOB_APP_ID"] = project.properties["ADMOB_APP_ID"] ?: ""
     }
 
     buildTypes {
@@ -82,13 +84,16 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
 
+    // JSOUP
+    implementation(libs.jsoup)
+
+    // AdMob
+    implementation(libs.play.services.ads)
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // JSOUP
-    implementation(libs.jsoup)
 }
 
 kapt {

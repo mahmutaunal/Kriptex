@@ -14,6 +14,7 @@ Kriptex is a modern Android app for secure AES-based text encryption and decrypt
 - 🧠 MVVM architecture with ViewBinding & NavigationComponent
 - ✅ Crash reporting with [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)
 - ✅ User behavior analytics with [Firebase Analytics](https://firebase.google.com/docs/analytics)
+- ✅ AdMob banner ads
 
 ## 📱 Screens
 

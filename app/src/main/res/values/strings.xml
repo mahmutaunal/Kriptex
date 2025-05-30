@@ -32,4 +32,8 @@
     <string name="history_empty">No records found.\nYour encrypted or decrypted texts will appear here.</string>
     <string name="home">Home</string>
     <string name="app_description">Welcome to Kriptex!\nSecurely encrypt and decrypt your sensitive data using QR codes.</string>
+    <string name="update_dialog_title">New Update Available</string>
+    <string name="update_dialog_message">A new version is available. Would you like to update the app?</string>
+    <string name="update_dialog_positive">Update</string>
+    <string name="update_dialog_negative">Later</string>
 </resources>

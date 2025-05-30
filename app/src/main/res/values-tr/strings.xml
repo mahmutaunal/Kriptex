@@ -32,4 +32,8 @@
     <string name="history_empty">Hiçbir kayıt bulunamadı.\nŞifrelenmiş veya şifresi çözülmüş metinleriniz burada görünecektir.</string>
     <string name="home">Ana Sayfa</string>
     <string name="app_description">Kriptex\'e hoş geldiniz!\nQR kodlarını kullanarak hassas verilerinizi güvenli bir şekilde şifreleyin ve şifresini çözün.</string>
+    <string name="update_dialog_title">Yeni Güncelleme Mevcut</string>
+    <string name="update_dialog_message">Yeni bir sürüm mevcut. Uygulamayı güncellemek ister misiniz?</string>
+    <string name="update_dialog_positive">Güncelle</string>
+    <string name="update_dialog_negative">Daha Sonra</string>
 </resources>
