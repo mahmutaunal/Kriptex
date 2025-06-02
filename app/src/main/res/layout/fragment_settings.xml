@@ -1,7 +1,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablHeader"
@@ -15,9 +16,10 @@
             android:id="@+id/tbHeader"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
+            android:background="@color/background_color"
             app:title="@string/settings"
-            app:titleCentered="true" />
+            app:titleCentered="true"
+            app:titleTextColor="@color/text_color" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -45,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/theme"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -53,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/light_dark_or_system_default"
+                android:textColor="@color/text_color"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -70,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/language"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -78,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/turkish_english_or_system_default"
+                android:textColor="@color/text_color"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

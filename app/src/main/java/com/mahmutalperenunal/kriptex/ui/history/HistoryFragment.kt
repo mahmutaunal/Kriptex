@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHistoryBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
@@ -32,6 +33,9 @@ class HistoryFragment : Fragment() {
         val toolbar = binding.tbHeader
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.hide()
 
         val adapter = HistoryAdapter { item, actionType ->
             when (actionType) {

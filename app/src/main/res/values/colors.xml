@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#E6DCF6</color>
+
+    <color name="background_color">#FFFFFFFF</color>
+    <color name="text_color">#FF000000</color>
+    <color name="navigation_bar_color">#EFE7F5</color>
+    <color name="adview_background_color">#EFE7F5</color>
 </resources>

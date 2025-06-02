@@ -11,16 +11,17 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.CompoundBarcodeView
+import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentQrScannerBinding
 
 class QrScannerFragment : Fragment() {
 
     private lateinit var barcodeView: CompoundBarcodeView
-    var onQrScanned: ((String) -> Unit)? = null
 
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -36,6 +37,9 @@ class QrScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentQrScannerBinding.inflate(inflater, container, false)
+
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.hide()
 
         barcodeView = binding.barcodeScanner
 

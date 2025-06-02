@@ -24,6 +24,7 @@
                 android:id="@+id/textOriginal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
                 android:textStyle="bold"
                 tools:text="Original" />
 
@@ -32,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
+                android:textColor="@color/text_color"
                 android:textIsSelectable="true"
                 tools:text="Encrypted" />
 
@@ -40,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
+                android:textColor="@color/text_color"
                 android:textSize="12sp"
                 tools:text="Date" />
         </LinearLayout>
@@ -48,9 +51,9 @@
             android:id="@+id/imageQr"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:scaleType="fitCenter"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
-            android:contentDescription="@string/qr_code" />
+            android:contentDescription="@string/qr_code"
+            android:scaleType="fitCenter" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

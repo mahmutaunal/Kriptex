@@ -15,6 +15,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentEncryptionBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
@@ -33,13 +34,15 @@ class EncryptionFragment : Fragment() {
 
     private lateinit var qrBitmap: Bitmap
 
+    private lateinit var fab: FloatingActionButton
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setFragmentResultListener("qr_scan_result") { _, bundle ->
             val scannedText = bundle.getString("scanned_text").orEmpty()
             binding.etPlainText.setText(scannedText)
-            binding.btnEncrypt.performClick()
+            fab.performClick()
         }
     }
 
@@ -54,16 +57,19 @@ class EncryptionFragment : Fragment() {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        fab = requireActivity().findViewById(R.id.fab)
+
         binding.etPlainText.addTextChangedListener { editable ->
             val inputText = editable?.toString() ?: ""
 
-            binding.btnEncrypt.visibility = if (inputText.isNotBlank()) View.VISIBLE else View.GONE
+            if (inputText.isNotBlank()) fab.show() else fab.hide()
+
             if (binding.tlPlainText.error != null) {
                 binding.tlPlainText.error = null
             }
         }
 
-        binding.btnEncrypt.setOnClickListener {
+        fab.setOnClickListener {
             val input = binding.etPlainText.text.toString()
             try {
                 val result = EncryptionUtil.encrypt(input)
@@ -90,14 +96,14 @@ class EncryptionFragment : Fragment() {
                 binding.tlPlainText.error = null
 
                 Toast.makeText(requireContext(), getString(R.string.encrypt_success), Toast.LENGTH_SHORT).show()
-                binding.btnEncrypt.visibility = View.GONE
+                fab.hide()
             } catch (e: Exception) {
                 binding.tlPlainText.error = getString(R.string.incorrect_text_or_encryption)
                 binding.tvEncrypted.text = ""
                 binding.ivQrCode.setImageDrawable(null)
                 binding.btnCopy.visibility = View.GONE
                 binding.btnShare.visibility = View.GONE
-                binding.btnEncrypt.visibility = View.GONE
+                fab.hide()
                 binding.ivQrCode.visibility = View.GONE
             }
         }
@@ -127,8 +133,14 @@ class EncryptionFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (binding.etPlainText.text?.isNotBlank() == true) fab.show() else fab.hide()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        fab.hide()
     }
 }
