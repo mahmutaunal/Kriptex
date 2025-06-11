@@ -2,6 +2,15 @@
 
 Kriptex is a modern Android app for secure AES-based text encryption and decryption, QR code generation, theme/language selection, and local history tracking.
 
+Kriptex is available on the Google Play Store.
+
+<p align="left">
+<a href="https://play.google.com/store/apps/details?id=com.mahmutalperenunal.kriptex">
+    <img alt="Get it on Google Play"
+        height="80"
+        src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
+</a>  
+
 ## 🚀 Features
 
 - 🔒 AES-128 CBC mode encryption & decryption
