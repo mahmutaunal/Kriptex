@@ -1,7 +1,6 @@
 package com.mahmutalperenunal.kriptex
 
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
@@ -17,7 +16,6 @@ import com.mahmutalperenunal.kriptex.util.LocalizationHelper
 import com.mahmutalperenunal.kriptex.util.ThemeHelper
 import com.mahmutalperenunal.kriptex.util.VersionChecker
 import kotlinx.coroutines.launch
-import androidx.core.net.toUri
 import com.google.android.gms.ads.AdRequest
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeHelper.applyTheme(this)
-
         super.onCreate(savedInstanceState)
+
+        ThemeHelper.applyTheme(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -59,10 +57,9 @@ class MainActivity : AppCompatActivity() {
     private fun Context.checkVersionIfConnected() {
         if (isNetworkAvailable()) {
             lifecycleScope.launch {
-                val latestVersion = VersionChecker.getLatestVersion()
-                val currentVersion = packageManager.getPackageInfo(packageName, 0).versionName
-                if (latestVersion != null && latestVersion != currentVersion) {
-                    showUpdateDialog(this@checkVersionIfConnected)
+                val updateInfo = VersionChecker.checkForUpdate(this@checkVersionIfConnected)
+                if (updateInfo != null) {
+                    showUpdateDialog(updateInfo)
                 }
             }
         }
@@ -75,17 +72,16 @@ class MainActivity : AppCompatActivity() {
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    private fun showUpdateDialog(context: Context) {
-        MaterialAlertDialogBuilder(context)
-            .setTitle(context.getString(R.string.update_dialog_title))
-            .setMessage(context.getString(R.string.update_dialog_message))
-            .setPositiveButton(context.getString(R.string.update_dialog_positive)) { _, _ ->
-                val url = "https://play.google.com/store/apps/details?id=${context.packageName}"
-                val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-                intent.setPackage("com.android.vending")
-                context.startActivity(intent)
+    private fun showUpdateDialog(updateInfo: VersionChecker.UpdateInfo) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.update_dialog_title))
+            .setMessage(getString(R.string.update_dialog_message))
+            .setPositiveButton(getString(R.string.update_dialog_positive)) { _, _ ->
+                lifecycleScope.launch {
+                    VersionChecker.startUpdate(this@MainActivity, updateInfo)
+                }
             }
-            .setNegativeButton(context.getString(R.string.update_dialog_negative), null)
+            .setNegativeButton(getString(R.string.update_dialog_negative), null)
             .show()
     }
 

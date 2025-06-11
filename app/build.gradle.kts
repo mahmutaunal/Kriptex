@@ -16,8 +16,8 @@ android {
         applicationId = "com.mahmutalperenunal.kriptex"
         minSdk = 28
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.1.1"
+        versionCode = 5
+        versionName = "1.1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -89,6 +89,9 @@ dependencies {
 
     // AdMob
     implementation(libs.play.services.ads)
+
+    // Play App Update
+    implementation(libs.play.app.update)
 
     // Test
     testImplementation(libs.junit)
