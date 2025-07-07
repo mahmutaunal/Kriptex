@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
+import androidx.core.view.isVisible
 import com.google.android.gms.ads.AdView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.mahmutalperenunal.kriptex.MainActivity
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHomeBinding
+import com.mahmutalperenunal.kriptex.util.BillingHelper
 
 class HomeFragment : Fragment() {
 
@@ -26,12 +29,20 @@ class HomeFragment : Fragment() {
         bottomNavigationView.visibility = View.VISIBLE
 
         val adView = requireActivity().findViewById<AdView>(R.id.adView)
-        adView.setBackgroundColor(requireContext().resources.getColor(R.color.adview_background_color))
+        adView.setBackgroundColor(requireContext().resources.getColor(R.color.background_color))
 
-        requireActivity().window.navigationBarColor = requireContext().resources.getColor(R.color.adview_background_color)
+        requireActivity().window.navigationBarColor = requireContext().resources.getColor(R.color.background_color)
 
-        binding.ivSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_settings)
+        binding.tvRemoveAds.isVisible = !BillingHelper.isAdsRemoved()
+
+        binding.tvRemoveAds.setOnClickListener {
+            BillingHelper.launchPurchaseFlow(
+                activity = requireActivity(),
+                context = requireContext(),
+                onError = { errorMessage ->
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                }
+            )
         }
 
         return binding.root

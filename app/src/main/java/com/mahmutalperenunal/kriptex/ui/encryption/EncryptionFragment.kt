@@ -1,27 +1,35 @@
 package com.mahmutalperenunal.kriptex.ui.encryption
 
+import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentEncryptionBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
+import com.mahmutalperenunal.kriptex.ui.qr.QrInputBottomSheet
 import com.mahmutalperenunal.kriptex.util.EncryptionUtil
-import com.mahmutalperenunal.kriptex.util.QrCodeGenerator
+import com.mahmutalperenunal.kriptex.util.QrUtils
 import com.mahmutalperenunal.kriptex.util.ShareUtils
 import kotlinx.coroutines.launch
 
@@ -35,6 +43,24 @@ class EncryptionFragment : Fragment() {
     private lateinit var qrBitmap: Bitmap
 
     private lateinit var fab: FloatingActionButton
+
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            findNavController().navigate(R.id.action_encryption_to_qrScanner)
+        } else {
+            Toast.makeText(requireContext(), requireContext().resources.getString(R.string.camera_permission_required), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val imagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            processQrImageFromGallery(uri)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,10 +78,6 @@ class EncryptionFragment : Fragment() {
         _binding = FragmentEncryptionBinding.inflate(inflater, container, false)
 
         db = AppDatabase.getDatabase(requireContext())
-
-        val toolbar = binding.tbHeader
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         fab = requireActivity().findViewById(R.id.fab)
 
@@ -76,7 +98,7 @@ class EncryptionFragment : Fragment() {
 
                 binding.tvEncrypted.text = result
 
-                qrBitmap = QrCodeGenerator.generate(result, context = requireContext())
+                qrBitmap = QrUtils.generate(result, context = requireContext())
                 binding.ivQrCode.setImageBitmap(qrBitmap)
 
                 binding.ivQrCode.visibility = View.VISIBLE
@@ -122,15 +144,53 @@ class EncryptionFragment : Fragment() {
         binding.btnShare.setOnClickListener {
             val text = binding.tvEncrypted.text.toString()
             if (text.isNotBlank()) {
-                ShareUtils.shareTextWithQrCode(requireContext(), text, qrBitmap)
+                val qrBitmapForShare = QrUtils.generateQrCodeForSharing(text, Color.BLACK)
+                ShareUtils.shareTextWithQrCode(requireContext(), text, qrBitmapForShare)
             }
         }
 
         binding.tlPlainText.setEndIconOnClickListener {
-            findNavController().navigate(R.id.action_encryption_to_qrScanner)
+            QrInputBottomSheet().apply {
+                onCameraSelected = { checkCameraPermissionAndNavigate() }
+                onGallerySelected = { checkGalleryPermissionAndPick() }
+            }.show(parentFragmentManager, "QrInputSheet")
         }
 
         return binding.root
+    }
+
+    private fun checkCameraPermissionAndNavigate() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED) {
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        } else {
+            findNavController().navigate(R.id.action_encryption_to_qrScanner)
+        }
+    }
+
+    private fun checkGalleryPermissionAndPick() {
+        imagePickerLauncher.launch("image/*")
+    }
+
+    private fun processQrImageFromGallery(uri: Uri) {
+        val source = InputImage.fromFilePath(requireContext(), uri)
+        val scanner = BarcodeScanning.getClient()
+
+        scanner.process(source)
+            .addOnSuccessListener { barcodes ->
+                val value = barcodes.firstOrNull()?.rawValue
+                if (value != null) {
+                    setFragmentResult("qr_scan_result", Bundle().apply {
+                        putString("scanned_text", value)
+                    })
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(requireContext(), requireContext().resources.getString(R.string.qr_scan_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.invalid_qr_image), Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onResume() {

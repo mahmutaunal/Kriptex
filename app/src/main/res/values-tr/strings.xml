@@ -36,4 +36,18 @@
     <string name="update_dialog_message">Yeni bir sürüm mevcut. Uygulamayı güncellemek ister misiniz?</string>
     <string name="update_dialog_positive">Güncelle</string>
     <string name="update_dialog_negative">Daha Sonra</string>
+    <string name="error">Hata</string>
+    <string name="product_details_not_found">Satın alınabilir ürün bulunamadı</string>
+    <string name="error_billing_not_ready">Satın alma hizmeti henüz hazır değil</string>
+    <string name="billing_launch_null">Satın alma başlatılamadı</string>
+    <string name="remove_ads_message">Reklamları kaldırmak için tıklayın</string>
+    <string name="ads_removed_successfully">Reklamlar başarıyla kaldırıldı</string>
+    <string name="purchase_failed">Satın alma işlemi başarısız oldu</string>
+    <string name="share_qr_content">QR İçeriğini Paylaş</string>
+    <string name="share_failed">Paylaşım Başarısız</string>
+    <string name="select_from_gallery">Galeriden Seç</string>
+    <string name="take_photo">Fotoğraf Çek</string>
+    <string name="camera_permission_required">Kamera izni gerekli</string>
+    <string name="qr_scan_failed">QR kod okunamadı</string>
+    <string name="invalid_qr_image">Hatalı görsel</string>
 </resources>

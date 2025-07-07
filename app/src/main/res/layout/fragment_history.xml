@@ -4,25 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/ablHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tbHeader"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/background_color"
-            app:title="@string/history"
-            app:titleCentered="true"
-            app:titleTextColor="@color/text_color" />
-    </com.google.android.material.appbar.AppBarLayout>
+    android:background="@color/background_color"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/tvEmptyState"
@@ -37,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ablHeader"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ablHeader"
+        app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="6"
         tools:listitem="@layout/item_encrypted_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,6 @@ class BottomSheetLanguage : BottomSheetDialogFragment() {
         when (currentLang) {
             "tr" -> binding.radioTr.isChecked = true
             "en" -> binding.radioEn.isChecked = true
-            else -> binding.radioSystem.isChecked = true
         }
 
         binding.radioTr.setOnClickListener {
@@ -32,12 +31,6 @@ class BottomSheetLanguage : BottomSheetDialogFragment() {
 
         binding.radioEn.setOnClickListener {
             LocalizationHelper.setLocale(requireContext(), "en")
-            requireActivity().recreate()
-            dismiss()
-        }
-
-        binding.radioSystem.setOnClickListener {
-            LocalizationHelper.setLocale(requireContext(), "")
             requireActivity().recreate()
             dismiss()
         }

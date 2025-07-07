@@ -2,22 +2,22 @@ package com.mahmutalperenunal.kriptex.ui.history
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHistoryBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
+import com.mahmutalperenunal.kriptex.util.QrUtils
+import com.mahmutalperenunal.kriptex.util.ShareUtils
 import kotlinx.coroutines.launch
 
 class HistoryFragment : Fragment() {
@@ -29,10 +29,6 @@ class HistoryFragment : Fragment() {
     ): View {
         val binding = FragmentHistoryBinding.inflate(inflater, container, false)
         db = AppDatabase.getDatabase(requireContext())
-
-        val toolbar = binding.tbHeader
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
         fab.hide()
@@ -46,13 +42,8 @@ class HistoryFragment : Fragment() {
                 }
 
                 HistoryAdapter.ActionType.SHARE -> {
-                    val intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, item.originalText)
-                        type = "text/plain"
-                    }
-                    startActivity(Intent.createChooser(intent, requireContext().resources.getString(
-                        R.string.share)))
+                    val qrBitmapForShare = QrUtils.generateQrCodeForSharing(item.originalText, Color.BLACK)
+                    ShareUtils.shareTextWithQrCode(requireContext(), item.originalText, qrBitmapForShare)
                 }
 
                 HistoryAdapter.ActionType.DELETE -> {

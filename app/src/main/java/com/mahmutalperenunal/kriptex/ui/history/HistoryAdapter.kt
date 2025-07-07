@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
-import com.mahmutalperenunal.kriptex.util.QrCodeGenerator
+import com.mahmutalperenunal.kriptex.util.QrUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -27,6 +27,8 @@ class HistoryAdapter(
         val textEncrypted: TextView = itemView.findViewById(R.id.textEncrypted)
         val textDate: TextView = itemView.findViewById(R.id.textDate)
         val imageQr: ImageView = itemView.findViewById(R.id.imageQr)
+        val buttonCopy: View = itemView.findViewById(R.id.llCopy)
+        val buttonShare: View = itemView.findViewById(R.id.llShare)
         val layoutRoot: View = itemView
     }
 
@@ -41,8 +43,16 @@ class HistoryAdapter(
         holder.textEncrypted.text = item.encryptedText
         holder.textDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date(item.timestamp))
 
-        val qrImage = QrCodeGenerator.generate(item.qrContent, 64, holder.layoutRoot.context)
+        val qrImage = QrUtils.generate(item.qrContent, 64, holder.layoutRoot.context)
         holder.imageQr.setImageBitmap(qrImage)
+
+        holder.buttonCopy.setOnClickListener {
+            onAction(item, ActionType.COPY)
+        }
+
+        holder.buttonShare.setOnClickListener {
+            onAction(item, ActionType.SHARE)
+        }
 
         holder.layoutRoot.setOnLongClickListener {
             showPopupMenu(holder.layoutRoot, item)

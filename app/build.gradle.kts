@@ -10,14 +10,14 @@ plugins {
 
 android {
     namespace = "com.mahmutalperenunal.kriptex"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mahmutalperenunal.kriptex"
         minSdk = 28
-        targetSdk = 35
-        versionCode = 5
-        versionName = "1.1.3"
+        targetSdk = 36
+        versionCode = 6
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -26,7 +26,9 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,8 +39,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
     }
     buildFeatures {
         viewBinding = true
@@ -92,6 +96,16 @@ dependencies {
 
     // Play App Update
     implementation(libs.play.app.update)
+
+    // Billing
+    implementation(libs.billing.ktx)
+
+    // Play Review
+    implementation(libs.play.review)
+    implementation(libs.play.review.ktx)
+
+    //ML-Kit
+    implementation(libs.mlkit.barcode.scanning)
 
     // Test
     testImplementation(libs.junit)
