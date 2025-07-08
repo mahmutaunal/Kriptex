@@ -3,14 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/actionTheme"
+        android:id="@+id/action_theme"
         android:title="@string/theme"
         android:icon="@drawable/ic_theme"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/actionLanguage"
+        android:id="@+id/action_language"
         android:title="@string/language"
         android:icon="@drawable/ic_language"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom" />
 </menu>

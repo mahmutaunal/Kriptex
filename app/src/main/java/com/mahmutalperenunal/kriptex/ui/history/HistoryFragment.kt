@@ -6,34 +6,89 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.mahmutalperenunal.kriptex.MainActivity
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHistoryBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
+import com.mahmutalperenunal.kriptex.data.model.EncryptedText
+import com.mahmutalperenunal.kriptex.util.EncryptionType
 import com.mahmutalperenunal.kriptex.util.QrUtils
 import com.mahmutalperenunal.kriptex.util.ShareUtils
 import kotlinx.coroutines.launch
 
 class HistoryFragment : Fragment() {
 
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var db: AppDatabase
+
+    private lateinit var adapter: HistoryAdapter
+
+    private var allItems: List<EncryptedText> = emptyList()
+    private var currentQuery: String = ""
+    private var selectedFilters: Set<EncryptionType> = emptySet()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear()
+                menuInflater.inflate(R.menu.menu_main, menu)
+
+                val searchItem = menu.findItem(R.id.action_search)
+                val searchView = searchItem.actionView as SearchView
+                searchView.queryHint = getString(R.string.search)
+
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean = false
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        filterList(newText.orEmpty())
+                        return true
+                    }
+                })
+
+                menu.findItem(R.id.action_filter).setOnMenuItemClickListener {
+                    showFilterBottomSheet()
+                    true
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
+        }, viewLifecycleOwner)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         db = AppDatabase.getDatabase(requireContext())
 
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
         fab.hide()
 
-        val adapter = HistoryAdapter { item, actionType ->
+        (requireActivity() as MainActivity).apply {
+            isFilterVisible = true
+            isSearchVisible = true
+            isThemeVisible = false
+            isLanguageVisible = false
+            invalidateOptionsMenu()
+        }
+
+        adapter = HistoryAdapter { item, actionType ->
             when (actionType) {
                 HistoryAdapter.ActionType.COPY -> {
                     val clipboard = ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
@@ -58,11 +113,41 @@ class HistoryFragment : Fragment() {
 
         lifecycleScope.launch {
             db.encryptedTextDao().getAll().collect { list ->
-                adapter.submitList(list)
-                binding.tvEmptyState.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                allItems = list
+                updateFilteredList()
             }
         }
 
         return binding.root
+    }
+
+    private fun filterList(query: String) {
+        currentQuery = query.lowercase()
+        updateFilteredList()
+    }
+
+    private fun updateFilteredList() {
+        val filtered = allItems.filter { item ->
+            val matchesQuery = item.originalText.lowercase().contains(currentQuery)
+            val matchesType = selectedFilters.isEmpty() || selectedFilters.any { it.name == item.type }
+            matchesQuery && matchesType
+        }
+        adapter.submitList(filtered)
+        binding.tvEmptyState.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    private fun showFilterBottomSheet() {
+        FilterBottomSheet(
+            selectedTypes = selectedFilters,
+            onTypesSelected = { selected ->
+                selectedFilters = selected
+                updateFilteredList()
+            }
+        ).show(parentFragmentManager, "FilterBottomSheet")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

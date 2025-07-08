@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +20,6 @@ import com.mahmutalperenunal.kriptex.util.ThemeHelper
 import com.mahmutalperenunal.kriptex.util.VersionChecker
 import kotlinx.coroutines.launch
 import com.google.android.gms.ads.AdRequest
-import com.mahmutalperenunal.kriptex.ui.settings.BottomSheetLanguage
-import com.mahmutalperenunal.kriptex.ui.settings.BottomSheetTheme
 import com.mahmutalperenunal.kriptex.util.BillingHelper
 import com.mahmutalperenunal.kriptex.util.InAppReviewUtil
 
@@ -30,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     private lateinit var bannerAds: View
+
+    var isFilterVisible: Boolean = false
+    var isSearchVisible: Boolean = false
+    var isThemeVisible: Boolean = false
+    var isLanguageVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +45,10 @@ class MainActivity : AppCompatActivity() {
 
         checkVersionIfConnected()
 
+        setSupportActionBar(binding.tbHeader)
+
         setupNavigation()
         setupSystemBars()
-        setupToolbar()
         setupBilling()
         setupAds()
     }
@@ -54,6 +59,14 @@ class MainActivity : AppCompatActivity() {
             InAppReviewUtil.onAppLaunched(applicationContext)
             InAppReviewUtil.requestReviewIfEligible(applicationContext, this)
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_filter)?.isVisible = isFilterVisible
+        menu?.findItem(R.id.action_search)?.isVisible = isSearchVisible
+        menu?.findItem(R.id.action_theme)?.isVisible = isThemeVisible
+        menu?.findItem(R.id.action_language)?.isVisible = isLanguageVisible
+        return super.onPrepareOptionsMenu(menu)
     }
 
     private fun Context.checkVersionIfConnected() {
@@ -103,22 +116,6 @@ class MainActivity : AppCompatActivity() {
 
             controller.isAppearanceLightStatusBars = !isDarkTheme
             controller.isAppearanceLightNavigationBars = !isDarkTheme
-        }
-    }
-
-    private fun setupToolbar() {
-        binding.tbHeader.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.actionTheme -> {
-                    BottomSheetTheme().show(supportFragmentManager, "ThemeSheet")
-                    true
-                }
-                R.id.actionLanguage -> {
-                    BottomSheetLanguage().show(supportFragmentManager, "LanguageSheet")
-                    true
-                }
-                else -> false
-            }
         }
     }
 

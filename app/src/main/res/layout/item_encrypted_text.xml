@@ -51,6 +51,16 @@
                     android:textColor="@color/text_color"
                     android:textSize="12sp"
                     tools:text="Date" />
+
+                <TextView
+                    android:id="@+id/textType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    tools:text="Type: EMAIL" />
             </LinearLayout>
 
             <ImageView
@@ -66,16 +76,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/llCopy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="4dp"
                 tools:ignore="UseCompoundDrawables">
 
@@ -85,16 +95,16 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/copy"
-                    android:src="@drawable/ic_copy"
-                    android:padding="4dp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_copy" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
                     android:text="@string/copy"
-                    android:textSize="12sp"
                     android:textColor="@color/text_color"
-                    android:paddingTop="2dp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <View
@@ -107,8 +117,8 @@
                 android:id="@+id/llShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="4dp"
                 tools:ignore="UseCompoundDrawables">
 
@@ -118,16 +128,16 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/share"
-                    android:src="@drawable/ic_share"
-                    android:padding="4dp" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_share" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
                     android:text="@string/share"
-                    android:textSize="12sp"
                     android:textColor="@color/text_color"
-                    android:paddingTop="2dp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

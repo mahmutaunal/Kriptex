@@ -9,5 +9,6 @@ data class EncryptedText(
     val originalText: String,
     val encryptedText: String,
     val qrContent: String,
+    val type: String,
     val timestamp: Long = System.currentTimeMillis()
 )

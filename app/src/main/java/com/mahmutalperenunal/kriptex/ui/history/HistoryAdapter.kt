@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
+import com.mahmutalperenunal.kriptex.util.EncryptionType
 import com.mahmutalperenunal.kriptex.util.QrUtils
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -26,6 +27,7 @@ class HistoryAdapter(
         val textOriginal: TextView = itemView.findViewById(R.id.textOriginal)
         val textEncrypted: TextView = itemView.findViewById(R.id.textEncrypted)
         val textDate: TextView = itemView.findViewById(R.id.textDate)
+        val textType: TextView = itemView.findViewById(R.id.textType)
         val imageQr: ImageView = itemView.findViewById(R.id.imageQr)
         val buttonCopy: View = itemView.findViewById(R.id.llCopy)
         val buttonShare: View = itemView.findViewById(R.id.llShare)
@@ -39,9 +41,19 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        val context = holder.layoutRoot.context
+
         holder.textOriginal.text = item.originalText
         holder.textEncrypted.text = item.encryptedText
         holder.textDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(Date(item.timestamp))
+
+        val localizedLabel = try {
+            EncryptionType.valueOf(item.type).getLocalizedLabel(context)
+        } catch (e: Exception) {
+            context.getString(R.string.type_unknown)
+        }
+
+        holder.textType.text = context.getString(R.string.type_display, localizedLabel)
 
         val qrImage = QrUtils.generate(item.qrContent, 64, holder.layoutRoot.context)
         holder.imageQr.setImageBitmap(qrImage)

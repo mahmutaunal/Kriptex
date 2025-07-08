@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -28,6 +29,7 @@ import com.mahmutalperenunal.kriptex.data.AppDatabase
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
 import com.mahmutalperenunal.kriptex.databinding.FragmentDecryptionBinding
 import com.mahmutalperenunal.kriptex.ui.qr.QrInputBottomSheet
+import com.mahmutalperenunal.kriptex.util.EncryptionType
 import com.mahmutalperenunal.kriptex.util.EncryptionUtil
 import com.mahmutalperenunal.kriptex.util.QrUtils
 import com.mahmutalperenunal.kriptex.util.ShareUtils
@@ -68,8 +70,22 @@ class DecryptionFragment : Fragment() {
         setFragmentResultListener("qr_scan_result") { _, bundle ->
             val scannedText = bundle.getString("scanned_text").orEmpty()
             binding.etEncryptedText.setText(scannedText)
+
+            val inferredType = inferEncryptionType(scannedText)
+            binding.actDecryptionType.setText(inferredType.getLocalizedLabel(requireContext()), false)
+
             fab.performClick()
         }
+
+        val typeLabels = EncryptionType.entries.map { it.getLocalizedLabel(requireContext()) }
+
+        val typeAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            typeLabels
+        )
+        binding.actDecryptionType.setAdapter(typeAdapter)
+        binding.actDecryptionType.setText(typeLabels.first(), false)
     }
 
     override fun onCreateView(
@@ -106,11 +122,17 @@ class DecryptionFragment : Fragment() {
                 binding.btnShare.visibility = View.VISIBLE
 
                 lifecycleScope.launch {
+                    val selectedLabel = binding.actDecryptionType.text.toString()
+                    val selectedType = EncryptionType.entries.firstOrNull {
+                        it.getLocalizedLabel(requireContext()) == selectedLabel
+                    } ?: EncryptionType.TEXT
+
                     db.encryptedTextDao().insert(
                         EncryptedText(
                             originalText = result,
                             encryptedText = input,
-                            qrContent = result
+                            qrContent = result,
+                            type = selectedType.name
                         )
                     )
                 }
@@ -156,6 +178,20 @@ class DecryptionFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun inferEncryptionType(text: String): EncryptionType {
+        return when {
+            text.startsWith("mailto:", true) -> EncryptionType.EMAIL
+            text.startsWith("tel:", true) -> EncryptionType.PHONE
+            text.startsWith("sms:", true) -> EncryptionType.SMS
+            text.startsWith("WIFI:", true) -> EncryptionType.WIFI
+            text.startsWith("geo:", true) -> EncryptionType.GEO
+            text.startsWith("BEGIN:VCARD", true) -> EncryptionType.VCARD
+            text.startsWith("BEGIN:VEVENT", true) -> EncryptionType.EVENT
+            text.startsWith("http://", true) || text.startsWith("https://", true) -> EncryptionType.URL
+            else -> EncryptionType.TEXT
+        }
     }
 
     private fun checkCameraPermissionAndNavigate() {

@@ -13,7 +13,8 @@ object LocalizationHelper {
     fun setLocale(context: Context, languageCode: String): Context {
         val codeToUse = languageCode.ifBlank { Locale.getDefault().language }
         saveLanguage(context, languageCode)
-        val locale = Locale(codeToUse)
+
+        val locale = Locale.forLanguageTag(codeToUse)
         Locale.setDefault(locale)
 
         val config = Configuration()
