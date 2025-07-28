@@ -9,4 +9,5 @@
     <color name="navigation_bar_color">#EFE7F5</color>
     <color name="divider_color">#CCCCCC</color>
     <color name="bottom_navigation_bar_color">#ECEBF2</color>
+    <color name="button_background_color">#D6D5DF</color>
 </resources>

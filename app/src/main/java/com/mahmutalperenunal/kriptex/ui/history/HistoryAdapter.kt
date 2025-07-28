@@ -29,8 +29,9 @@ class HistoryAdapter(
         val textDate: TextView = itemView.findViewById(R.id.textDate)
         val textType: TextView = itemView.findViewById(R.id.textType)
         val imageQr: ImageView = itemView.findViewById(R.id.imageQr)
-        val buttonCopy: View = itemView.findViewById(R.id.llCopy)
-        val buttonShare: View = itemView.findViewById(R.id.llShare)
+        val buttonCopy: View = itemView.findViewById(R.id.buttonCopy)
+        val buttonShare: View = itemView.findViewById(R.id.buttonShare)
+        val buttonDelete: View = itemView.findViewById(R.id.buttonDelete)
         val layoutRoot: View = itemView
     }
 
@@ -66,10 +67,14 @@ class HistoryAdapter(
             onAction(item, ActionType.SHARE)
         }
 
-        holder.layoutRoot.setOnLongClickListener {
+        holder.buttonDelete.setOnClickListener {
+            onAction(item, ActionType.DELETE)
+        }
+
+        /*holder.layoutRoot.setOnLongClickListener {
             showPopupMenu(holder.layoutRoot, item)
             true
-        }
+        }*/
     }
 
     private fun showPopupMenu(view: View, item: EncryptedText) {

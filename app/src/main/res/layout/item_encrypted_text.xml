@@ -28,6 +28,7 @@
 
                 <TextView
                     android:id="@+id/textOriginal"
+                    style="@style/TextAppearance.Material3.BodyLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
@@ -36,6 +37,7 @@
 
                 <TextView
                     android:id="@+id/textEncrypted"
+                    style="@style/TextAppearance.Material3.BodyMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="6dp"
@@ -44,16 +46,8 @@
                     tools:text="Encrypted" />
 
                 <TextView
-                    android:id="@+id/textDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="6dp"
-                    android:textColor="@color/text_color"
-                    android:textSize="12sp"
-                    tools:text="Date" />
-
-                <TextView
                     android:id="@+id/textType"
+                    style="@style/TextAppearance.Material3.LabelSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="6dp"
@@ -61,6 +55,16 @@
                     android:textSize="12sp"
                     android:textStyle="italic"
                     tools:text="Type: EMAIL" />
+
+                <TextView
+                    android:id="@+id/textDate"
+                    style="@style/TextAppearance.Material3.LabelSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp"
+                    tools:text="Date" />
             </LinearLayout>
 
             <ImageView
@@ -76,69 +80,66 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:baselineAligned="false"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-            <LinearLayout
-                android:id="@+id/llCopy"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="4dp"
-                tools:ignore="UseCompoundDrawables">
+                android:layout_weight="1"
+                android:gravity="center">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/buttonCopy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_button_circle"
                     android:contentDescription="@string/copy"
                     android:padding="4dp"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_copy" />
+            </FrameLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
-                    android:text="@string/copy"
-                    android:textColor="@color/text_color"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="36dp"
-                android:layout_marginHorizontal="36dp"
-                android:background="@color/divider_color" />
-
-            <LinearLayout
-                android:id="@+id/llShare"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="4dp"
-                tools:ignore="UseCompoundDrawables">
+                android:layout_weight="1"
+                android:gravity="center">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/buttonShare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_button_circle"
                     android:contentDescription="@string/share"
                     android:padding="4dp"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_share" />
+            </FrameLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
-                    android:text="@string/share"
-                    android:textColor="@color/text_color"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_button_circle"
+                    android:contentDescription="@string/delete"
+                    android:padding="4dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_delete" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
