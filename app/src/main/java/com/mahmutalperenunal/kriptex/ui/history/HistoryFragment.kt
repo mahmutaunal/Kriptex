@@ -1,5 +1,6 @@
 package com.mahmutalperenunal.kriptex.ui.history
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.graphics.Color
@@ -23,6 +24,7 @@ import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHistoryBinding
 import com.mahmutalperenunal.kriptex.data.AppDatabase
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
+import com.mahmutalperenunal.kriptex.util.AdManager
 import com.mahmutalperenunal.kriptex.util.EncryptionType
 import com.mahmutalperenunal.kriptex.util.QrUtils
 import com.mahmutalperenunal.kriptex.util.ShareUtils
@@ -97,11 +99,15 @@ class HistoryFragment : Fragment() {
                 }
 
                 HistoryAdapter.ActionType.SHARE -> {
+                    AdManager.recordActionAndShowAdIfNeeded(context as Activity, 5)
+
                     val qrBitmapForShare = QrUtils.generateQrCodeForSharing(item.originalText, Color.BLACK)
                     ShareUtils.shareTextWithQrCode(requireContext(), item.originalText, qrBitmapForShare)
                 }
 
                 HistoryAdapter.ActionType.DELETE -> {
+                    AdManager.recordActionAndShowAdIfNeeded(context as Activity, 5)
+
                     lifecycleScope.launch {
                         db.encryptedTextDao().delete(item)
                     }

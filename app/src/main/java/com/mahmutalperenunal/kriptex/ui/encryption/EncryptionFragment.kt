@@ -1,6 +1,7 @@
 package com.mahmutalperenunal.kriptex.ui.encryption
 
 import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -40,6 +41,7 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import androidx.core.net.toUri
 import com.google.android.material.textfield.TextInputLayout
+import com.mahmutalperenunal.kriptex.util.AdManager
 
 class EncryptionFragment : Fragment() {
 
@@ -118,6 +120,8 @@ class EncryptionFragment : Fragment() {
         }
 
         fab.setOnClickListener {
+            AdManager.recordActionAndShowAdIfNeeded(context as Activity, 3)
+
             val rawInput = binding.etPlainText.text.toString()
             val selectedLabel = binding.actEncryptionType.text.toString()
             val selectedType = EncryptionType.entries.firstOrNull {
