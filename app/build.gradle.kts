@@ -16,8 +16,8 @@ android {
         applicationId = "com.mahmutalperenunal.kriptex"
         minSdk = 28
         targetSdk = 36
-        versionCode = 9
-        versionName = "2.0.2"
+        versionCode = 12
+        versionName = "2.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
