@@ -1,127 +1,76 @@
-# ================================
-# ✅ GENERAL CONFIGURATION
-# ================================
-
--dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--dontpreverify
 -verbose
--optimizations !code/simplification/arithmetic
+-renamesourcefileattribute A
 
-# Hata ayıklama bilgileri (opsiyonel)
--keepattributes SourceFile,LineNumberTable
--renamesourcefileattribute SourceFile
+# ==========================
+# 📌 ANDROID CORE
+# ==========================
 
-# Uygulama giriş noktası
--keep class com.mahmutalperenunal.kriptex.** { *; }
+-keepclassmembers class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
 
-# ================================
-# ✅ ANDROIDX & JETPACK
-# ================================
+-keepclassmembers class * implements android.os.Parcelable {
+    static ** CREATOR;
+}
 
-# Room
--keep class androidx.room.** { *; }
+# ==========================
+# 🏛️ ROOM (DAO + Entity + Database)
+# ==========================
+
+-keep @androidx.room.Entity class * { *; }
+-keep @androidx.room.Dao class * { *; }
+-keep @androidx.room.Database class * { *; }
+
+-keep class * extends androidx.room.RoomDatabase
+
 -dontwarn androidx.room.**
 
-# ViewModel ve LiveData
--keep class androidx.lifecycle.** { *; }
--dontwarn androidx.lifecycle.**
+# ==========================
+# 🧬 Gson
+# ==========================
 
-# Biometric API
--keep class androidx.biometric.** { *; }
-
-# ConstraintLayout
--keep class androidx.constraintlayout.** { *; }
-
-# Navigation Component (SafeArgs)
--keep class androidx.navigation.** { *; }
-
-# ================================
-# ✅ JSON & SERIALIZATION
-# ================================
-
-# GSON
--keep class com.google.gson.** { *; }
+-keep class com.mahmutalperenunal.kriptex.data.model.** { *; }
 -dontwarn com.google.gson.**
 
-# ================================
-# ✅ FIREBASE
-# ================================
-
-# Firebase Analytics & Crashlytics
--keep class com.google.firebase.** { *; }
--dontwarn com.google.firebase.**
-
-# Exception sınıfları (Crashlytics için)
--keep public class * extends java.lang.Exception
-
-# Firebase Storage
--keep class com.google.firebase.storage.** { *; }
--dontwarn com.google.firebase.storage.**
-
-# ================================
-# ✅ CRYPTO (AES şifreleme, Keystore)
-# ================================
-
--keep class javax.crypto.** { *; }
--dontwarn javax.crypto.**
--keep class java.security.** { *; }
--dontwarn java.security.**
--keep class android.security.** { *; }
--dontwarn android.security.**
+# ==========================
+# 🔐 Crypto (AES / Util)
+# ==========================
 
 -keep class com.mahmutalperenunal.kriptex.util.EncryptionUtil { *; }
 
 -keepclassmembers class com.mahmutalperenunal.kriptex.data.model.EncryptedText { <fields>; }
 
-# ================================
-# ✅ DYNAMIC FEATURES / REFLECTION
-# ================================
+# ==========================
+# 📌 Biometrics
+# ==========================
 
--keep class **.databinding.*Binding { *; }
--keep class com.mahmutalperenunal.kriptex.databinding.** { *; }
+-keep class androidx.biometric.** { *; }
 
-# Material Components ve support
--keep class com.google.android.material.** { *; }
+# ==========================
+# 🧾 Crashlytics
+# ==========================
 
-# ================================
-# ✅ ROOT DETECTION (RootBeer)
-# ================================
+-keep public class * extends java.lang.Exception
+-dontwarn com.google.firebase.**
 
--keep class com.scottyab.rootbeer.** { *; }
--dontwarn com.scottyab.rootbeer.**
+# ==========================
+# 💳 Play Billing / Play Integrity
+# ==========================
 
-# ================================
-# ✅ PLAY BILLING
-# ================================
-
--keep class com.android.billingclient.** { *; }
 -dontwarn com.android.billingclient.**
-
-# ================================
-# ✅ PLAY INTEGRITY API
-# ================================
-
 -keep class com.google.android.play.integrity.** { *; }
--dontwarn com.google.android.play.integrity.**
 
-# DEX optimizasyonunu sınırla (bazı crash'leri engeller)
--dontoptimize
+# ==========================
+# 🔍 Root Detection (RootBeer)
+# ==========================
 
-# ================================
-# ✅ ML KIT - BARCODE SCANNING
-# ================================
+-keep class com.scottyab.rootbeer.**
+
+# ==========================
+# 🔎 ML Kit
+# ==========================
 
 -keep class com.google.mlkit.vision.barcode.** { *; }
 -dontwarn com.google.mlkit.vision.barcode.**
-
-# Vision common classes
--keep class com.google.mlkit.vision.common.** { *; }
--dontwarn com.google.mlkit.vision.common.**
-
--keep class com.google.android.gms.internal.mlkit_vision_barcode.** { *; }
--dontwarn com.google.android.gms.internal.mlkit_vision_barcode.**
-
-# ZXing (QR Code Writer)
--keep class com.google.zxing.** { *; }
--dontwarn com.google.zxing.**
