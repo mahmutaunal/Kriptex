@@ -51,7 +51,7 @@ class FilterBottomSheet(
         private val onToggle: (EncryptionType) -> Unit
     ) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val checkbox: CheckBox = view.findViewById(R.id.checkboxFilter)
         }
 

@@ -8,9 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.MenuProvider
-import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mahmutalperenunal.kriptex.MainActivity
@@ -18,7 +16,6 @@ import com.mahmutalperenunal.kriptex.R
 import com.mahmutalperenunal.kriptex.databinding.FragmentHomeBinding
 import com.mahmutalperenunal.kriptex.ui.settings.BottomSheetLanguage
 import com.mahmutalperenunal.kriptex.ui.settings.BottomSheetTheme
-import com.mahmutalperenunal.kriptex.util.BillingHelper
 
 class HomeFragment : Fragment() {
 
@@ -66,21 +63,10 @@ class HomeFragment : Fragment() {
             invalidateOptionsMenu()
         }
 
-        binding.tvRemoveAds.isVisible = !BillingHelper.isAdsRemoved()
-
-        binding.tvRemoveAds.setOnClickListener {
-            BillingHelper.launchPurchaseFlow(
-                activity = requireActivity(),
-                context = requireContext(),
-                onError = { errorMessage ->
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-                }
-            )
-        }
-
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()

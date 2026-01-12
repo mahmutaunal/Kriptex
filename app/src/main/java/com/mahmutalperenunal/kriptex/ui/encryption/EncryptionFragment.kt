@@ -1,7 +1,7 @@
 package com.mahmutalperenunal.kriptex.ui.encryption
 
 import android.Manifest
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -41,7 +41,6 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import androidx.core.net.toUri
 import com.google.android.material.textfield.TextInputLayout
-import com.mahmutalperenunal.kriptex.util.AdManager
 
 class EncryptionFragment : Fragment() {
 
@@ -120,8 +119,6 @@ class EncryptionFragment : Fragment() {
         }
 
         fab.setOnClickListener {
-            AdManager.recordActionAndShowAdIfNeeded(context as Activity, 3)
-
             val rawInput = binding.etPlainText.text.toString()
             val selectedLabel = binding.actEncryptionType.text.toString()
             val selectedType = EncryptionType.entries.firstOrNull {
@@ -160,7 +157,7 @@ class EncryptionFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 fab.hide()
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 binding.tlPlainText.error = getString(R.string.incorrect_text_or_encryption)
                 binding.tvEncrypted.text = ""
                 binding.ivQrCode.setImageDrawable(null)
@@ -287,7 +284,7 @@ class EncryptionFragment : Fragment() {
                     }
                     try {
                         startActivity(intent)
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                         Toast.makeText(requireContext(), getString(R.string.no_map_app_found), Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -303,7 +300,7 @@ class EncryptionFragment : Fragment() {
                 }
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     Toast.makeText(requireContext(), getString(R.string.no_map_app_found), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -313,6 +310,7 @@ class EncryptionFragment : Fragment() {
         }.show(parentFragmentManager, "LocationInputSheet")
     }
 
+    @SuppressLint("DefaultLocale")
     private fun showDatePicker(onDateSelected: (String) -> Unit) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)

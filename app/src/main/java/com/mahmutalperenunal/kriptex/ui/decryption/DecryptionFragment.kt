@@ -1,7 +1,6 @@
 package com.mahmutalperenunal.kriptex.ui.decryption
 
 import android.Manifest
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.pm.PackageManager
@@ -30,7 +29,6 @@ import com.mahmutalperenunal.kriptex.data.AppDatabase
 import com.mahmutalperenunal.kriptex.data.model.EncryptedText
 import com.mahmutalperenunal.kriptex.databinding.FragmentDecryptionBinding
 import com.mahmutalperenunal.kriptex.ui.qr.QrInputBottomSheet
-import com.mahmutalperenunal.kriptex.util.AdManager
 import com.mahmutalperenunal.kriptex.util.EncryptionType
 import com.mahmutalperenunal.kriptex.util.EncryptionUtil
 import com.mahmutalperenunal.kriptex.util.QrUtils
@@ -110,8 +108,6 @@ class DecryptionFragment : Fragment() {
         }
 
         fab.setOnClickListener {
-            AdManager.recordActionAndShowAdIfNeeded(context as Activity, 3)
-
             val input = binding.etEncryptedText.text.toString()
 
             try {
@@ -146,7 +142,7 @@ class DecryptionFragment : Fragment() {
 
                 Toast.makeText(requireContext(), getString(R.string.decrypt_success), Toast.LENGTH_SHORT).show()
                 fab.hide()
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 binding.tlEncryptedText.error = getString(R.string.incorrect_text_or_encryption)
                 binding.tvDecrypted.text = ""
                 binding.ivQrCode.setImageDrawable(null)

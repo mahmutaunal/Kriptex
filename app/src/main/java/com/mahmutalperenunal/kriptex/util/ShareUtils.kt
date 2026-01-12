@@ -34,7 +34,7 @@ object ShareUtils {
             val chooser = Intent.createChooser(shareIntent, context.getString(R.string.share_qr_content))
             context.startActivity(chooser)
 
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Toast.makeText(context, context.getString(R.string.share_failed), Toast.LENGTH_SHORT).show()
         }
     }

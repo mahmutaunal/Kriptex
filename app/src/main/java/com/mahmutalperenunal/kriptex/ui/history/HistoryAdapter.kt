@@ -23,7 +23,7 @@ class HistoryAdapter(
 
     enum class ActionType { COPY, SHARE, DELETE }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textOriginal: TextView = itemView.findViewById(R.id.textOriginal)
         val textEncrypted: TextView = itemView.findViewById(R.id.textEncrypted)
         val textDate: TextView = itemView.findViewById(R.id.textDate)
@@ -50,7 +50,7 @@ class HistoryAdapter(
 
         val localizedLabel = try {
             EncryptionType.valueOf(item.type).getLocalizedLabel(context)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             context.getString(R.string.type_unknown)
         }
 

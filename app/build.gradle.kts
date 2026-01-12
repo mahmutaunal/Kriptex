@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.navigation.safe.args)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.google.services)
-    alias(libs.plugins.firebase.crashlytics.gradle)
 }
 
 android {
@@ -20,8 +18,6 @@ android {
         versionName = "2.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        manifestPlaceholders["ADMOB_APP_ID"] = project.properties["ADMOB_APP_ID"] ?: ""
     }
 
     buildTypes {
@@ -83,26 +79,8 @@ dependencies {
     // Zxing Android Embedded
     implementation(libs.zxing.android.embedded)
 
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-
     // JSOUP
     implementation(libs.jsoup)
-
-    // AdMob
-    implementation(libs.play.services.ads)
-
-    // Play App Update
-    implementation(libs.play.app.update)
-
-    // Billing
-    implementation(libs.billing.ktx)
-
-    // Play Review
-    implementation(libs.play.review)
-    implementation(libs.play.review.ktx)
 
     //ML-Kit
     implementation(libs.mlkit.barcode.scanning)
