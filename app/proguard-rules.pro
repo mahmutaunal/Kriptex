@@ -35,14 +35,6 @@
 -dontwarn com.google.gson.**
 
 # ==========================
-# 🔐 Crypto (AES / Util)
-# ==========================
-
--keep class com.mahmutalperenunal.kriptex.util.EncryptionUtil { *; }
-
--keepclassmembers class com.mahmutalperenunal.kriptex.data.model.EncryptedText { <fields>; }
-
-# ==========================
 # 📌 Biometrics
 # ==========================
 
